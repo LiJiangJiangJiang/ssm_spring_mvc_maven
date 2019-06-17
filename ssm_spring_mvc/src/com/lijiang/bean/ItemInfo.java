@@ -4,7 +4,7 @@ public class ItemInfo {
 
 	//id
 	private Integer id;
-	//username
+
 	private String username;
 	private String password;
 	public Integer getId() {
