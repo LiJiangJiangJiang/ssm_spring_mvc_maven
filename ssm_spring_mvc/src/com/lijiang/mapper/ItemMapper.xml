@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper    
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lijiang.mapper.ItemMapper">
+
+<!-- 	List<ItemInfo> selectAll(ItemInfo itemInfo); -->
+  <select id="selectAll" resultType="ItemInfo" parameterType="ItemInfo">
+  	select * from user
+  	<where>
+			<if test="username != null and username != ''">
+				and username LIKE "%"#{username}"%"
+			</if>
+	</where>
+  </select>
+<!--   void deleteById(Integer id); -->
+  <delete id="deleteById" parameterType="Integer">
+   delete from user where id=#{id}
+  </delete>
+<!--   void saveItem(ItemInfo itemInfo); -->
+   <insert id="saveItem" parameterType="ItemInfo">
+   insert into user values(#{id},#{username}, #{password});
+   </insert>
+<!-- void updateItem(ItemInfo itemInfo); -->
+   <update id="updateItem" parameterType="ItemInfo">
+   	update user
+  		<set>
+  			<if test="username != null and username != ''">username = #{username},</if>
+  			<if test="password != null and password != ''">password = #{password}</if>
+  		</set>
+  		where id = #{id}
+   </update>
+<!--    ItemInfo selectItemInfoById(Integer id); -->
+	<select id="selectItemInfoById" parameterType="Integer" resultType="ItemInfo">
+		select * from user where id=#{id}
+	</select>
+</mapper>
